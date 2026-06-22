@@ -26,6 +26,8 @@ app.add_middleware(
 #func to get stations from Open Charge Map api
 def fetch_stations(country_code="MA", max_results= 100):
     url = "https://api.openchargemap.io/v3/poi"  
+    print(f"API KEY IS: {API_KEY}")
+    print(f"Response status: {response.status_code if 'response' in dir() else 'not yet'}")
 
     #params we sent to API
     params={
@@ -37,7 +39,7 @@ def fetch_stations(country_code="MA", max_results= 100):
     }
 
     response = requests.get(url, params=params)
-
+    print (f"RESPONSE STATUS: {response.status_code}")
     #if it go wrong
     if response.status_code !=200:
         raise HTTPException(status_code=500, detail="Failed to fetch stations")
