@@ -185,3 +185,16 @@ def get_stations():
     return fetch_stations()
 
 #get /stations/analytics
+@app.get ("/stations/analytics")
+def get_analytics():
+    stations= fetch_stations()
+    total= len(stations)
+    operational= len([s for s in stations if s.get("is_operational") == True])
+    total_points= sum (s.get("number_of_points") or 0 for s in stations)
+    return{
+        "total_stations": total,
+        "operational_stations": operational,
+        "non_operational_stations": total - operational,
+        "total_charging_points": total_points,"
+    }
+    
