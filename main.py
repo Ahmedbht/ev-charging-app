@@ -197,4 +197,10 @@ def get_analytics():
         "non_operational_stations": total - operational,
         "total_charging_points": total_points,"
     }
-    
+
+# get /stations/top
+@app.get("/stations/top")
+def get_top_stations():
+    stations= fetch_stations()
+    sorted_stations= sorted(stations, key= lambda s: s.get("number_of_points") or 0, reverse_True )
+    return sorted_stations[:10]
