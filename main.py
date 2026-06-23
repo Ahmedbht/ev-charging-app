@@ -1,3 +1,15 @@
+# ============================================
+"""
+# NOTE: The original implementation below used
+# the Open Charge Map API to fetch real-time
+# EV charging station data worldwide.
+# However, the API blocks requests from cloud
+# server IPs (Render, Railway etc.), returning
+# 403 Forbidden errors.
+# The current implementation uses cached local
+# JSON data as a workaround while keeping the
+# same API structure and endpoints.
+# ============================================
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests 
@@ -148,3 +160,18 @@ def get_top_stations(country: str="MA"):
         }
         for s in sorted_stations[:10]
     ] 
+    """
+# -------------------------------------------
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import json
+
+#create FastAPI app
+app = FastAPI()
+
+#CORS :allow React to talk to fastapi
+app.add_middleware(
+    CORSMiddleware, allow_origins=["*"], allow_credentials= True, allow_methods["*"],allow_headers=[*],
+)
+#read statiosn from local json file
