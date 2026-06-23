@@ -180,3 +180,8 @@ def fetch_stations():
         return json.load(f)
 
 #get /stations
+@app.get("/stations")
+def get_stations():
+    return fetch_stations()
+
+#get /stations/analytics
