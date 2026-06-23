@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from models import Station, Operator,ConnectionType
 from validators import StationValidator
 from utils import filter_by_country, filter_operational , sort_by_points ,analyze_stations
+import json
 
 #get env file to know the api-key
 load_dotenv()
@@ -25,9 +26,10 @@ app.add_middleware(
 
 #func to get stations from Open Charge Map api
 def fetch_stations(country_code="MA", max_results= 100):
-    url = "https://api.openchargemap.io/v3/poi"  
-    print(f"API KEY IS: {API_KEY}")
-    print(f"Response status: {response.status_code if 'response' in dir() else 'not yet'}")
+    #read data from local json file
+    with open("stations_data.json", "r", encoding='utf-8') as f:
+        data =json.load(f)
+    return data
 
     #params we sent to API
     params={
