@@ -172,7 +172,7 @@ app = FastAPI()
 
 #CORS :allow React to talk to fastapi
 app.add_middleware(
-    CORSMiddleware, allow_origins=["*"], allow_credentials= True, allow_methods["*"],allow_headers=[*],
+    CORSMiddleware, allow_origins=["*"], allow_credentials= True, allow_methods=["*"],allow_headers=["*"],
 )
 #read statiosn from local json file
 def fetch_stations(): 
@@ -195,14 +195,14 @@ def get_analytics():
         "total_stations": total,
         "operational_stations": operational,
         "non_operational_stations": total - operational,
-        "total_charging_points": total_points,"
+        "total_charging_points": total_points,
     }
 
 # get /stations/top
 @app.get("/stations/top")
 def get_top_stations():
     stations= fetch_stations()
-    sorted_stations= sorted(stations, key= lambda s: s.get("number_of_points") or 0, reverse_True )
+    sorted_stations= sorted(stations, key= lambda s: s.get("number_of_points") or 0, reverse=True )
     return sorted_stations[:10]
 
 #get /stations/operational
