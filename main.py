@@ -175,3 +175,8 @@ app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_credentials= True, allow_methods["*"],allow_headers=[*],
 )
 #read statiosn from local json file
+def fetch_stations(): 
+    with open("stations_data.json" , "r", encoding="utf-8") as f:
+        return json.load(f)
+
+#get /stations
