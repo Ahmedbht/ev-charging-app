@@ -204,3 +204,9 @@ def get_top_stations():
     stations= fetch_stations()
     sorted_stations= sorted(stations, key= lambda s: s.get("number_of_points") or 0, reverse_True )
     return sorted_stations[:10]
+
+#get /stations/operational
+@app.get("/stations/operational")
+def get_operational_stations():
+    stations = fetch_statiosn()
+    return [s for s in stations if s.get("is_operational") == True]
